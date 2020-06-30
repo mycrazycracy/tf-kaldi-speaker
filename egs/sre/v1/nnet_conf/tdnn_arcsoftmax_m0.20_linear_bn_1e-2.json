@@ -1,0 +1,45 @@
+{
+  "seed": 0,
+  "network_type": "tdnn",
+  "last_layer_linear": true,
+  "feature_norm": false,
+
+  "loss_func": "additive_angular_margin_softmax",
+  "arcsoftmax_m": 0.20,
+  "arcsoftmax_lambda_min": 0,
+  "arcsoftmax_lambda_base": 1000,
+  "arcsoftmax_lambda_gamma": 0.00001,
+  "arcsoftmax_lambda_power": 6,
+
+  "batch_type": "softmax",
+  "pooling_type": "statistics_pooling",
+  "embedding_node": "tdnn6_dense",
+
+  "learning_rate": 0.001,
+  "optimizer": "momentum",
+  "momentum": 0.9,
+  "use_nesterov": false,
+  "clip_gradient": false,
+
+  "weight_l2_regularizer": 1e-2,
+  "batchnorm_momentum": 0.99,
+
+  "num_epochs": 200,
+  "num_steps_per_epoch": 60000,
+  "reduce_lr_epochs": 4,
+  "show_training_progress": 200,
+  "keep_checkpoint_max": 100,
+  "save_summary_steps": 30000,
+  "save_checkpoints_steps": 60000,
+  "valid_max_iterations": 5000,
+
+  "num_parallel_datasets": 8,
+  "max_queue_size": 10,
+  "num_speakers_per_batch": 64,
+  "num_segments_per_speaker": 1,
+  "min_segment_len": 200,
+  "max_segment_len": 400,
+
+  "early_stop_epochs": 10,
+  "min_learning_rate": 1e-6
+}

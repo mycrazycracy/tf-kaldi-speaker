@@ -1,0 +1,53 @@
+{
+  "seed": 0,
+
+  "learning_rate": 0.001,
+  "optimizer": "momentum",
+  "momentum": 0.9,
+  "use_nesterov": false,
+  "clip_gradient": false,
+
+  "weight_l2_regularizer": 1e-4,
+  "batchnorm_momentum": 0.99,
+
+  "batch_type": "softmax",
+
+  "?context_size": "context_size is to make sure the phonetic outputs have exactly the same #frames with the alignment",
+  "context_size": 7,
+  "num_shared_layers": 0,
+  "pooling_type": "statistics_pooling",
+
+  "spk_loss_weight": 0,
+  "speaker_dim": 512,
+  "spk_last_layer_no_bn": false,
+  "spk_last_layer_linear": false,
+  "spk_loss_type": "softmax",
+
+  "phn_loss_weight": 1.0,
+  "phone_dim": 512,
+  "phn_loss_type": "softmax",
+  "?num_frames_per_utt": "How many frames in a segment should be used to train the phone network. If -1, use all.",
+  "num_frames_per_utt": 4,
+
+  "spk_embedding_node": "zs_mu_relu",
+  "phn_embedding_node": "zp_mu_relu",
+
+  "num_parallel_datasets": 8,
+  "max_queue_size": 10,
+  "num_speakers_per_batch": 64,
+  "num_segments_per_speaker": 1,
+  "min_segment_len": 100,
+  "max_segment_len": 300,
+
+  "num_epochs": 200,
+  "num_steps_per_epoch": 7000,
+  "show_training_progress": 200,
+  "keep_checkpoint_max": 100,
+  "save_summary_steps": 3500,
+  "save_checkpoints_steps": 7000,
+  "valid_max_iterations": 1000,
+
+  "reduce_lr_epochs": 3,
+  "early_stop_epochs": 8,
+  "min_learning_rate": 1e-6
+}

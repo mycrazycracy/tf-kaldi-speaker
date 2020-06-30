@@ -1,0 +1,48 @@
+{
+  "seed": 0,
+  "network_type": "tdnn",
+  "last_layer_linear": false,
+  "loss_func": "softmax",
+  "batch_type": "softmax",
+
+  "pooling_type": "self_attention",
+  "att_key_input": "tdnn4_relu",
+  "att_key_num_nodes": [1500, 1500],
+  "att_key_network_type": 2,
+  "att_value_input": "tdnn5_relu",
+  "att_value_num_nodes": [],
+  "att_value_network_type": 0,
+  "att_apply_nonlinear": false,
+  "att_use_scale": true,
+  "att_num_heads": 1,
+  "att_split_key": false,
+  "att_penalty_term": 0,
+
+  "learning_rate": 0.005,
+  "optimizer": "momentum",
+  "momentum": 0.9,
+  "use_nesterov": false,
+  "clip_gradient": false,
+
+  "weight_l2_regularizer": 1e-2,
+  "batchnorm_momentum": 0.99,
+
+  "num_epochs": 200,
+  "num_steps_per_epoch": 16000,
+  "reduce_lr_epochs": 3,
+  "show_training_progress": 200,
+  "keep_checkpoint_max": 100,
+  "save_summary_steps": 8000,
+  "save_checkpoints_steps": 16000,
+  "valid_max_iterations": 5000,
+
+  "num_parallel_datasets": 4,
+  "max_queue_size": 10,
+  "num_speakers_per_batch": 64,
+  "num_segments_per_speaker": 1,
+  "min_segment_len": 100,
+  "max_segment_len": 300,
+
+  "early_stop_epochs": 8,
+  "min_learning_rate": 1e-6
+}
