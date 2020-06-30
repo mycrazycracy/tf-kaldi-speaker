@@ -1,6 +1,6 @@
-Due to the copyright issue, I can only publish the single GPU version which was developed before Jan. 2019. Some implementations should also be improved, e.g., the GPU memory allocation. The library can still be used as a framework for speaker verification. Multi-GPU and other approaches could be added with less efforts.  
+Due to *the copyright issue*, I can only publish the single GPU version which was developed before Jan. 2019. Some implementations need to be improved as well, e.g., the GPU memory allocation. The library can still be used as a framework for speaker verification. Multi-GPU and other approaches could be added with fewer efforts.  
 
-**Note** When you extract the speaker embedding using extract.sh, make sure that your TensorFlow is compiled WITHOUT MKL. As I know, some versions of TF installed by anaconda are compiled with MKL. It will use multiple threads when TF is running on CPUs. This is harmful if you run multiple processes (say 40). The threads conflict will make the extraction extreamly slow. For me, I use pip to install TF 1.12, and that works. 
+**Note** When you extract the speaker embedding using extract.sh, make sure that your TensorFlow is compiled WITHOUT MKL. As I know, some versions of TF installed by anaconda are compiled with MKL. It will use multiple threads when TF is running on CPUs. This is harmful if you run multiple processes (say 40). The threads conflict will make the extraction extremely slow. For me, I use pip to install TF 1.12, and that works. 
 
 ----
 
@@ -9,12 +9,12 @@ Due to the copyright issue, I can only publish the single GPU version which was 
 The **tf-kaldi-speaker** implements a neural network based speaker verification system
 using [Kaldi](https://github.com/kaldi-asr/kaldi) and [TensorFlow](https://github.com/tensorflow/tensorflow).
 
-The main idea is that Kaldi can be used to do the pre- and post-processings
+The main idea is that Kaldi can be used to do the pre- and post-processing
 while TF is a better choice to build the neural network.
 Compared with Kaldi nnet3, the modification of the network (e.g. adding attention, using different loss functions) using TF costs less.
 Adding other features to support text-dependent speaker verification is also possible.
 
-The purpose of the project is to make researches on neural network based speaker verification easier.
+The purpose of the project is to make researches on neural network-based speaker verification easier.
 I also try to reproduce some results in my papers.
 
 
@@ -26,14 +26,14 @@ I also try to reproduce some results in my papers.
 
     Since Kaldi is only used to do the pre- and post-processing, most version >5.2 works.
     Though I'm not 100% sure, I believe Kaldi with x-vector support (e.g. egs/sre16/v2) is enough.
-    But if you want to run egs/voxceleb, make sure your Kaldi also contains this examples.
+    But if you want to run egs/voxceleb, make sure your Kaldi also contains these examples.
 
 * Tensorflow: >1.4.0
 
     I write the code using TF 1.4.0 at the very beginning. Then I updated to v1.12.0.
     The future version will support TF >1.12 but I will try to make the API compatible with lower versions.
     Due to the API changes (e.g. keep_dims to keepdims in some functions), some may experience incorrect parameters.
-    In that case, simply check the parameters may fix these problems.
+    In that case, simply checking the parameters may fix these problems.
 
 
 # Methodology
@@ -41,7 +41,7 @@ I also try to reproduce some results in my papers.
 The general pipeline of our framework is:
 
 * For training:
-1. Kaldi: Data preparation --> feature extraction --> training example generateion (CMVN + VAD + ...)
+1. Kaldi: Data preparation --> feature extraction --> training example generation (CMVN + VAD + ...)
 2. TF: Network training (training examples + nnet config)
 
 * For test:
@@ -58,12 +58,12 @@ Again, the backend classifier is integrated using Kaldi.
 
 # Features
 
-* Entire pipeline of neural network based speaker verification.
+* Entire pipeline of neural network-based speaker verification.
 * Both training from scratch and fine-tuning a pre-trained model are supported.
 * Examples including VoxCeleb and SRE. Refer to Fisher to customized the dataset.
 * Standard x-vector architecture (with minor modification).
 * Angular softmax, additive margin softmax, additive angular margin softmax, triplet loss and other loss functions.
-* Self attention
+* Self-attention
 
 # Usage
  * The demos for SRE and VoxCeleb are included in egs/{sre,voxceleb}. Follow `run.sh` to go through the code.
@@ -73,13 +73,13 @@ Again, the backend classifier is integrated using Kaldi.
 
 * Performance
 
-    I've test the code on three datasets and the results are better than the standard Kaldi recipe. (Of course, you can achieve better performance using Kaldi by carefully tuning the parameters.)
+    I've tested the code on three datasets and the results are better than the standard Kaldi recipe. (Of course, you can achieve better performance using Kaldi by carefully tuning the parameters.)
 
     See [RESULTS](./RESULTS.md) for details.
 
 * Speed
 
-    Since it only support single gpu, the speed is not very fast but acceptable in medium-scale datasets.
+    Since it only supports single GPU, the speed is not very fast but acceptable in medium-scale datasets.
     For VoxCeleb, the training takes about 2.5 days using Nvidia P100 and it takes ~4 days for SRE.
     
 
@@ -109,19 +109,19 @@ Again, the backend classifier is integrated using Kaldi.
 * Advantages
     1. Performance: The performance of our code is shown to perform better than Kaldi.
     2. Storage: There is no need to generate a *packed* egs as Kaldi when training the network. The training will load the data on the fly.
-    3. Flexibility: Changing the network architecture and loss function is pretty easy.
+    3. Flexibility: Changing network architecture and loss function is pretty easy.
 
 * Disadvantages
     1. Training speed: Due to the copyright issue, although the multi-gpu version is implemented, only the single GPU is supported in the public version. 
     2. Since no packed egs are generated. Multiple CPUs must be used to load the data during training.
-    This is a overhead when the utterances are very long. You have to assign enough CPUs to make the loading speech fast enough to match the GPU processing speed.
+    This is an overhead when the utterances are very long. You have to assign enough CPUs to make the loading speech fast enough to match the GPU processing speed.
 
 # Other discussions
 
-* In this code, I provide two possible methods to tune the learning rate when SGD is used: using validation set and using fixed file.
+* In this code, I provide two possible methods to tune the learning rate when SGD is used: using validation set and using a fixed file.
 The first method works well but it may take longer to train the network.
 
-* More complicated network architectures could be implemented (similar to the TDNN in model/tdnn.py). Deeper network is worth trying since we have enough training data. That would result in better performance.
+* More complicated network architectures could be implemented (similar to the TDNN in model/tdnn.py). Deeper networks are worth trying since we have enough training data. That would result in better performance.
 
 # License
 
@@ -129,7 +129,7 @@ The first method works well but it may take longer to train the network.
 
 # Acknowledgements
 
-The computational resources are initially provided by Prof. Mark Gales in Cambridge University Engineering Department (CUED). After my visiting to Cambridge, the resources are mainly supported by Dr. Liang He in Tsinghua University Electronic Engineering Department (THUEE).
+The computational resources are initially provided by Prof. Mark Gales in Cambridge University Engineering Department (CUED). After my visit to Cambridge, the resources are mainly supported by Dr. Liang He in Tsinghua University Electronic Engineering Department (THUEE).
 
 
 # Last ...
